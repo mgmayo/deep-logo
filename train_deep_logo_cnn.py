@@ -37,8 +37,7 @@ FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_string(
     "train_dir", "flickr_logos_27_dataset",
     "Directory where to write event logs and checkpoint.")
-#tf.app.flags.DEFINE_integer("max_steps", 20001, "Number of batches to run.")
-tf.app.flags.DEFINE_integer("max_steps", 101, "Number of batches to run.")
+tf.app.flags.DEFINE_integer("max_steps", 20001, "Number of batches to run.")
 tf.app.flags.DEFINE_integer("image_width", common.CNN_IN_WIDTH,
                             "A width of an input image.")
 tf.app.flags.DEFINE_integer("image_height", common.CNN_IN_HEIGHT,
@@ -60,7 +59,7 @@ def reformat(dataset, labels):
     dataset = dataset.reshape((-1, FLAGS.image_height, FLAGS.image_width,
                                FLAGS.num_channels)).astype(np.float32)
     labels = (
-            np.arange(model.NUM_CLASSES) == labels[:, None]).astype(np.float32)
+        np.arange(model.NUM_CLASSES) == labels[:, None]).astype(np.float32)
     return dataset, labels
 
 
@@ -177,15 +176,15 @@ def main():
                     print('Minibatch loss at step %d: %f' % (step, l))
                     print('Minibatch accuracy: %.1f%%' % accuracy(
                         predictions, batch_labels))
-                    #print('Validation accuracy: %.1f%%' % accuracy(
-                    #    valid_prediction.eval(), valid_labels))
+                    print('Validation accuracy: %.1f%%' % accuracy(
+                        valid_prediction.eval(), valid_labels))
             except KeyboardInterrupt:
                 last_weights = [p.eval() for p in model_params]
                 np.savez("weights.npz", *last_weights)
                 return last_weights
-            
 
-       # print('Test accuracy: %.1f%%' % accuracy(test_prediction.eval(), test_labels))
+        print('Test accuracy: %.1f%%' % accuracy(test_prediction.eval(),
+                                                 test_labels))
 
         # Save the variables to disk.
         save_dir = "models"

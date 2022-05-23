@@ -24,6 +24,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+import selectivesearch
 import common
 import util
 import skimage.io

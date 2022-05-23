@@ -31,7 +31,9 @@ import model
 import argparse
 import os
 import preprocess
+from concurrent.futures import ProcessPoolExecutor, as_completed
 import util
+import skimage.draw
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
@@ -143,7 +145,6 @@ def main():
             (x, y), w, h, fill=False, edgecolor='red', linewidth=1)
         ax.add_patch(rect)
     plt.show()
-    print('Done')
 
 
 if __name__ == '__main__':
