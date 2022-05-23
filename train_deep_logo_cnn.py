@@ -60,7 +60,7 @@ def reformat(dataset, labels):
     dataset = dataset.reshape((-1, FLAGS.image_height, FLAGS.image_width,
                                FLAGS.num_channels)).astype(np.float32)
     labels = (
-        np.arange(model.NUM_CLASSES) == labels[:, None]).astype(np.float32)
+            np.arange(model.NUM_CLASSES) == labels[:, None]).astype(np.float32)
     return dataset, labels
 
 
